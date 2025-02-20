@@ -1,4 +1,3 @@
-
 window.onload = function() {
     const element1 = document.getElementById("element_1");
     const element7 = document.getElementById("element_7");
@@ -10,11 +9,9 @@ window.onload = function() {
 
     let dataApi = [];
     
-    // Función para realizar la búsqueda y mostrar los resultados
     function mostrarResultados() {
-        const id = element1.value.trim(); // Obtiene el valor de 'element_1'
+        const id = element1.value.trim(); 
 
-        // Asegurarse de que haya un ID ingresado
         if (!id) {
             console.log("❌ No se ha ingresado un ID en 'element_1'.");
             resetComboboxes();
@@ -28,14 +25,8 @@ window.onload = function() {
             .then(data => {
                 if (data && Array.isArray(data) && data.length > 0) {
                     console.log("✅ Resultados:", data);
-
-                    // Limpiar los combobox y deshabilitarlos
                     resetComboboxes();
-                    
-                    // Guardamos los resultados en memoria
                     dataApi = data;
-
-                    // Cargar escuelas ordenadas y sin duplicados
                     loadEscuelas();
                 } else {
                     console.log("⚠️ ID no encontrado o sin resultados.");
@@ -45,7 +36,6 @@ window.onload = function() {
             .catch(error => console.error("❌ Error en la API:", error));
     }
 
-    // Función para limpiar los comboboxes y deshabilitarlos
     function resetComboboxes() {
         if (element7) {
             element7.innerHTML = '<option value="">Sin clases asociadas</option>';
@@ -57,22 +47,17 @@ window.onload = function() {
         }
     }
 
-    // Función para cargar las escuelas
     function loadEscuelas() {
         const escuelas = [...new Set(dataApi.map(item => item.escuela))].sort();
-        
-        // Agregar opción predeterminada
         const opciones = ['<option value="" selected disabled>Selecciona una escuela</option>']
             .concat(escuelas.map(escuela => `<option value="${escuela}">${escuela}</option>`));
-        
-        // Rellenar el combobox con las escuelas
+
         if (element8) {
             element8.innerHTML = opciones.join('');
             element8.disabled = false;
             console.log("✅ Escuelas cargadas:", escuelas);
         }
 
-        // Cargar clases cuando se seleccione una escuela
         if (element8) {
             element8.addEventListener("change", function() {
                 loadClases(element8.value);
@@ -80,14 +65,12 @@ window.onload = function() {
         }
     }
 
-    // Función para cargar las clases en función de la escuela seleccionada
     function loadClases(escuelaSeleccionada) {
         const clases = dataApi
             .filter(item => item.escuela == escuelaSeleccionada)
             .map(item => item.clase)
             .sort();
-        
-        // Rellenar el combobox con las clases
+
         if (element7) {
             element7.innerHTML = clases.length > 0 
                 ? clases.map(clase => `<option value="${clase}">${clase}</option>`).join('')
@@ -97,11 +80,16 @@ window.onload = function() {
         }
     }
 
-    // Asignar el evento 'blur' para que se ejecute cuando el campo pierde el foco
     if (element1) {
         element1.addEventListener("blur", mostrarResultados);
     }
 
-    // Confirmación de que el script ha sido cargado correctamente
+    // 🔥 Forzar actualización de selects antes de enviar el formulario
+    document.querySelector("form").addEventListener("submit", function () {
+        console.log("🔄 Forzando actualización de select antes de enviar.");
+        element7.value = element7.options[element7.selectedIndex]?.value || "";
+        element8.value = element8.options[element8.selectedIndex]?.value || "";
+    });
+
     console.log("✅ El script ha sido cargado correctamente 1.");
 };
