@@ -1,8 +1,8 @@
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    var inputID = document.querySelector("#element_1"); // Ajusta según el ID del campo en MachForm
-    var outputEscuelas = document.querySelector("#element_5"); // Campo donde mostrar las escuelas
-    var outputClases = document.querySelector("#element_7"); // Campo donde mostrar las clases
+    var inputID = document.querySelector("element_1"); // Ajusta según el ID del campo en MachForm
+    var outputEscuelas = document.querySelector("element_5"); // Campo donde mostrar las escuelas
+    var outputClases = document.querySelector("element_7"); // Campo donde mostrar las clases
     
     inputID.addEventListener("blur", function() { 
         var id = inputID.value.trim(); // Obtener y limpiar el ID ingresado
