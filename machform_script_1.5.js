@@ -61,11 +61,13 @@ window.onload = function() {
     function loadEscuelas() {
         const escuelas = [...new Set(dataApi.map(item => item.escuela))].sort();
         
+        // Agregar opción predeterminada
+        const opciones = ['<option value="" selected disabled>Selecciona una escuela</option>']
+            .concat(escuelas.map(escuela => `<option value="${escuela}">${escuela}</option>`));
+        
         // Rellenar el combobox con las escuelas
         if (element8) {
-            element8.innerHTML = escuelas.map(escuela => 
-                `<option value="${escuela}">${escuela}</option>`
-            ).join('');
+            element8.innerHTML = opciones.join('');
             element8.disabled = false;
             console.log("✅ Escuelas cargadas:", escuelas);
         }
@@ -90,7 +92,7 @@ window.onload = function() {
             element7.innerHTML = clases.length > 0 
                 ? clases.map(clase => `<option value="${clase}">${clase}</option>`).join('')
                 : '<option value="">Sin clases asociadas</option>';
-            element7.disabled = false;
+            element7.disabled = clases.length === 0;
             console.log("✅ Clases cargadas:", clases);
         }
     }
@@ -101,5 +103,5 @@ window.onload = function() {
     }
 
     // Confirmación de que el script ha sido cargado correctamente
-    console.log("✅ El script ha sido cargado correctamente.");
+    console.log("✅ El script ha sido cargado correctamente 1.");
 };
