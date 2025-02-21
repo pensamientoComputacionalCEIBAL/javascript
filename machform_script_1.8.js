@@ -4,7 +4,6 @@ window.onload = function() {
     const element8 = document.getElementById("element_8");
     const element9 = document.getElementById("element_9");  // cuadro de texto para element_8
     const element10 = document.getElementById("element_10");  // cuadro de texto para element_7
-    const submitButton = document.getElementById("submitButton");  // botón de envío
 
     // Deshabilitar ambos combobox inicialmente
     if (element7) element7.disabled = true;
@@ -78,6 +77,7 @@ window.onload = function() {
         if (element8) {
             element8.addEventListener("change", function() {
                 loadClases(element8.value);
+                copyValues();  // Copiar valores inmediatamente cuando se seleccione una escuela
             });
         }
     }
@@ -99,24 +99,28 @@ window.onload = function() {
         }
     }
 
+    // Función para copiar los valores de los combobox a los cuadros de texto
+    function copyValues() {
+        if (element8 && element9) {
+            element9.value = element8.value;  // Copiar valor de 'element_8' a 'element_9'
+        }
+        if (element7 && element10) {
+            element10.value = element7.value;  // Copiar valor de 'element_7' a 'element_10'
+        }
+    }
+
     // Asignar el evento 'blur' para que se ejecute cuando el campo pierde el foco
     if (element1) {
         element1.addEventListener("blur", mostrarResultados);
     }
 
-    // Evento para el botón de envío
-    if (submitButton) {
-        submitButton.addEventListener("click", function(event) {
-            event.preventDefault();  // Prevenir el envío del formulario
+    // Asignar el evento 'change' para copiar los valores cuando cambian
+    if (element7) {
+        element7.addEventListener("change", copyValues);  // Copiar el valor de 'element_7' a 'element_10'
+    }
 
-            // Copiar los valores de 'element_8' y 'element_7' a 'element_9' y 'element_10'
-            if (element8 && element9) {
-                element9.value = element8.value;  // Copiar valor de 'element_8' a 'element_9'
-            }
-            if (element7 && element10) {
-                element10.value = element7.value;  // Copiar valor de 'element_7' a 'element_10'
-            }
-        });
+    if (element8) {
+        element8.addEventListener("change", copyValues);  // Copiar el valor de 'element_8' a 'element_9'
     }
 
     // Confirmación de que el script ha sido cargado correctamente
