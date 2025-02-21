@@ -4,10 +4,15 @@ window.onload = function() {
     const element8 = document.getElementById("element_8");
     const element9 = document.getElementById("element_9");  // cuadro de texto para element_8
     const element10 = document.getElementById("element_10");  // cuadro de texto para element_7
+    const element11 = document.getElementById("element_11");  // nuevo cuadro de texto para concatenación
 
     // Deshabilitar ambos combobox inicialmente
     if (element7) element7.disabled = true;
     if (element8) element8.disabled = true;
+    if (element11) {
+        element11.disabled = true;  // Deshabilitar element_11
+        element11.value = "No determinado";  // Valor por defecto
+    }
 
     let dataApi = [];
     
@@ -78,6 +83,7 @@ window.onload = function() {
             element8.addEventListener("change", function() {
                 loadClases(element8.value);
                 copyValues();  // Copiar valores inmediatamente cuando se seleccione una escuela
+                updateElement11();  // Actualizar el valor de element_11 con la concatenación
             });
         }
     }
@@ -109,20 +115,18 @@ window.onload = function() {
         }
     }
 
+    // Función para actualizar el valor de element_11 con la concatenación de element_7 y element_8
+    function updateElement11() {
+        if (element7 && element8 && element11) {
+            // Concatenar los valores de element_7 y element_8
+            element11.value = `${element8.value} - ${element7.value}`;
+        }
+    }
+
     // Asignar el evento 'blur' para que se ejecute cuando el campo pierde el foco
     if (element1) {
         element1.addEventListener("blur", mostrarResultados);
     }
 
-    // Asignar el evento 'change' para copiar los valores cuando cambian
-    if (element7) {
-        element7.addEventListener("change", copyValues);  // Copiar el valor de 'element_7' a 'element_10'
-    }
+    // Asignar el evento 'change' para copiar 
 
-    if (element8) {
-        element8.addEventListener("change", copyValues);  // Copiar el valor de 'element_8' a 'element_9'
-    }
-
-    // Confirmación de que el script ha sido cargado correctamente
-    console.log("✅ El script ha sido cargado correctamente 1.");
-};
