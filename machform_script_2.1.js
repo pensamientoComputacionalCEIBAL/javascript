@@ -10,7 +10,6 @@ window.onload = function() {
     if (element7) element7.disabled = true;
     if (element8) element8.disabled = true;
     if (element11) {
-        element11.disabled = true;  // Deshabilitar element_11
         element11.value = "No determinado";  // Valor por defecto
     }
 
