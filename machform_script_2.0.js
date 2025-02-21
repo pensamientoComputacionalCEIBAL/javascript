@@ -128,5 +128,21 @@ window.onload = function() {
         element1.addEventListener("blur", mostrarResultados);
     }
 
-    // Asignar el evento 'change' para copiar 
+    // Asignar el evento 'change' para copiar los valores cuando cambian
+    if (element7) {
+        element7.addEventListener("change", function() {
+            copyValues();  // Copiar el valor de 'element_7' a 'element_10'
+            updateElement11();  // Actualizar el valor de element_11
+        });
+    }
 
+    if (element8) {
+        element8.addEventListener("change", function() {
+            copyValues();  // Copiar el valor de 'element_8' a 'element_9'
+            updateElement11();  // Actualizar el valor de element_11
+        });
+    }
+
+    // Confirmación de que el script ha sido cargado correctamente
+    console.log("✅ El script ha sido cargado correctamente 1.");
+};
