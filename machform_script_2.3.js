@@ -23,13 +23,13 @@ window.onload = function() {
         if (elementDay) elementDay.value = today.getDate();
         if (elementMonth) elementMonth.value = today.getMonth() + 1;
         if (elementYear) elementYear.value = today.getFullYear();
-        console.log("✅ Fecha actual cargada en MachForm.");
+        //console.log("✅ Fecha actual cargada en MachForm.");
     }
 
     function mostrarResultados() {
         const id = element1.value.trim();
         if (!id) {
-            console.log("❌ No se ha ingresado un ID en 'element_1'.");
+            //.log("❌ No se ha ingresado un ID en 'element_1'.");
             resetComboboxes();
             return;
         }
@@ -40,12 +40,12 @@ window.onload = function() {
             .then(response => response.json())
             .then(data => {
                 if (data && Array.isArray(data) && data.length > 0) {
-                    console.log("✅ Resultados:", data);
+                    //console.log("✅ Resultados:", data);
                     resetComboboxes();
                     dataApi = data;
                     loadEscuelas();
                 } else {
-                    console.log("⚠️ ID no encontrado o sin resultados.");
+                    //console.log("⚠️ ID no encontrado o sin resultados.");
                     resetComboboxes();
                 }
             })
@@ -70,7 +70,7 @@ window.onload = function() {
         if (element8) {
             element8.innerHTML = opciones.join('');
             element8.disabled = false;
-            console.log("✅ Escuelas cargadas:", escuelas);
+            //console.log("✅ Escuelas cargadas:", escuelas);
         }
         if (element8) {
             element8.addEventListener("change", function() {
@@ -91,7 +91,7 @@ window.onload = function() {
                 ? clases.map(clase => `<option value="${clase}">${clase}</option>`).join('')
                 : '<option value="">Sin clases asociadas</option>';
             element7.disabled = clases.length === 0;
-            console.log("✅ Clases cargadas:", clases);
+            //console.log("✅ Clases cargadas:", clases);
         }
     }
 
@@ -129,5 +129,5 @@ window.onload = function() {
     }
 
     setCurrentDate();
-    console.log("✅ El script ha sido cargado correctamente.");
+    console.log("✅");
 };
